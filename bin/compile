@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e # fail on any error
+
 indent() {
   sed -u 's/^/       /'
 }
@@ -17,7 +19,7 @@ mkdir -p $VENDOR_DIR
 cd $VENDOR_DIR
 mkdir -p ffmpeg
 cd ffmpeg
-curl -L --silent $DOWNLOAD_URL | tar xJ --strip-components=1
+curl -L --silent --fail $DOWNLOAD_URL | tar xJ --strip-components=1
 
 echo "exporting PATH" | indent
 PROFILE_PATH="$BUILD_DIR/.profile.d/ffmpeg.sh"
